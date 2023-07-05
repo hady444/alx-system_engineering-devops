@@ -1,2 +1,2 @@
 #!/bin/bash
-mkdir alx-system_engineering-devops/my_first_directory
+mkdir /home/vagrant//my_first_directory
