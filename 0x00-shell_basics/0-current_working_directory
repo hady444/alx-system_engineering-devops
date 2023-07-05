@@ -1,2 +1,3 @@
-#!/bin/bash
+vagrant@ubuntu-focal:~/alx-system_engineering-devops/0x00-shell_basics$ #!/bin/bash
+vagrant@ubuntu-focal:~/alx-system_engineering-devops/0x00-shell_basics$ pwd
 /home/vagrant/alx-system_engineering-devops/0x00-shell_basics
