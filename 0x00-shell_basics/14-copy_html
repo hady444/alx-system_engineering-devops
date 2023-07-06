@@ -1,2 +1,2 @@
 #!/bin/bash
-cp -u ./ ../
+rsync -u --exclude *.txt *.html ../html 2>/dev/null
