@@ -1,2 +1,2 @@
 #!/bin/bash
-cat etc/passwd | sort -k 1
+awk -F: {print : } /etc/passwd | sort
