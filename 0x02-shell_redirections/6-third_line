@@ -1,2 +1,2 @@
 #!/bin/bash
-awk {ptint NR,$3} ./iacta
+echo "awk {print NR,$3} ./iacta"
