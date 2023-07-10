@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "$(awk {print NR,} ./iacta)"
+echo "$(awk "NR==3" ./iacta)"
