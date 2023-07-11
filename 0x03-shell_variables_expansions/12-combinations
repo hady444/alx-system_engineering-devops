@@ -1,0 +1,3 @@
+#!/bin/bash
+echo {a..n}{p..z} {o{a..n},o{p..z}} | tr ' ' '\n'
+
