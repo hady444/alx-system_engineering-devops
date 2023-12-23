@@ -1,16 +1,8 @@
 #!/usr/bin/env bash
 #4-to_infinity_and_beyond
-on_sigterm() {
-    echo "I am invincible!!!"
-
-    exit 0
-}
-
-trap 'on_sigterm' SIGTERM
-
-i="1"
-while [ $i -eq 1 ]
+while true
 do
 	echo "To infinity and beyond"
 	$"sleep" "2"
+	trap 'echo "I am invincible!!!"' SIGTERM
 done
