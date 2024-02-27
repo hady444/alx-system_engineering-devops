@@ -4,4 +4,7 @@
 sudo apt-get -y updatex
 sudo apt-get -y install nginx
 echo "Hello World!" > /var/www/html/index.html
-sudo service nginx start
+kill -HUP $(pgrep nginx)
+
+# Verify if Nginx is listening on port 80
+netstat -tuln | grep ":80" > /dev/null
