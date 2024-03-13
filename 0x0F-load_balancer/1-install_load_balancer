@@ -7,7 +7,7 @@ sudo apt-get update
 sudo apt-get install -y haproxy
 
 # Configure HAProxy
-cat <<EOF | sudo tee /etc/haproxy/haproxy.cfg
+echo '
 frontend http_front
     bind *:80
     stats uri /haproxy?stats
@@ -17,15 +17,7 @@ backend http_back
     balance roundrobin
     server 477100-web-01 35.175.134.192:80 check
     server 477100-web-02 34.207.63.125:80 check
-EOF
+' >> /etc/haproxy/haproxy.cfg
 
 # Restart HAProxy to apply changes
-sudo systemctl restart haproxy
-
-# Enable HAProxy init script
-sudo systemctl enable haproxy
-
-sed -i "s/\[477100\]/$(hostname | cut -d '-' -f 1)/g" /etc/haproxy/haproxy.cfg
-
-# Restart HAProxy again to apply hostname changes
 sudo systemctl restart haproxy
