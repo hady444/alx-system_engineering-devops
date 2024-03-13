@@ -1,25 +1,31 @@
 #!/usr/bin/env bash
-# Configures a new ubuntu machine by installing
+# Configures a new Ubuntu machine by installing
 # Nginx where it should be listening on port 80
 # Serve a page that would return a Hello World string
-#
-sudo apt-get update
-sudo apt-get install nginx
 
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Insert the add_header directive in the Nginx configuration
 sudo sed -i '/server_name _;/a \\\tadd_header X-Served-By $hostname;' /etc/nginx/sites-available/default
 
-echo -e "Hello World!" > /var/www/html/index.html
+# Create the index.html file with "Hello World!" content
+echo -e "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 
-SEARCH=$(greb "redirect_me" /etc/nginx/sites-available/default)
+# Check if the redirection location exists in the Nginx configuration
+SEARCH=$(grep "redirect_me" /etc/nginx/sites-available/default)
 STR="\\\n\tlocation /redirect_me {\n\t\t return 301 https://www.youtube.com/watch?v=3MbaGJN2ioQ;\n\t}\n"
 if [[ -z $SEARCH ]]; then
-	sed -i "42i $STR" /etc/nginx/sites-available/default
+    sudo sed -i "42i $STR" /etc/nginx/sites-available/default
 fi
 
-SEARCH=$(greb "error_page 404" /etc/nginx/sites-available/default)
+# Check if the custom 404 error page configuration exists in the Nginx configuration
+SEARCH=$(grep "error_page 404" /etc/nginx/sites-available/default)
 ERR="\\\n\terror_page 404 /custom_404.html;\n"
 if [[ -z $SEARCH ]]; then
-    echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
-    sed -i "40i $ERR" /etc/nginx/sites-available/default
+    echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html > /dev/null
+    sudo sed -i "40i $ERR" /etc/nginx/sites-available/default
 fi
+
+# Restart Nginx to apply the changes
 sudo systemctl restart nginx
