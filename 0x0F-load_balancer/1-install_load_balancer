@@ -20,4 +20,4 @@ backend http_back
 ' >> /etc/haproxy/haproxy.cfg
 
 # Restart HAProxy to apply changes
-sudo systemctl restart haproxy
+service haproxy restart
