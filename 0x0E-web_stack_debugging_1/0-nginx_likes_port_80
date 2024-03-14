@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # Edit the default Nginx configuration to listen on port 80 for all IPv4 IPs
 
-sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
+sudo sed -i "s/sites-enabled/sites-available/" /etc/nginx/nginx.conf
 service nginx restart
