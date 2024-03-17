@@ -12,7 +12,7 @@ display_dns_info() {
         record_type=$(echo "$dig_output" | awk '{print $4}')
         echo "The subdomain $subdomain is a $record_type record and points to $destination"
     else
-        echo "No DNS records found for subdomain $subdomain"
+        echo "The subdomain $subdomain does not exist"
     fi
 }
 
