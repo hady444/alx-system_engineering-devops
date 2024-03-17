@@ -6,7 +6,6 @@ display_dns_info() {
     local domain="$2"
 
     dig_output=$(dig "${subdomain}.${domain}" | awk '/^;; ANSWER SECTION:$/,/^$/' | awk '/IN\s+A/')
-
     if [[ -n "$dig_output" ]]; then
         destination=$(echo "$dig_output" | awk '{print $NF}')
         record_type=$(echo "$dig_output" | awk '{print $4}')
@@ -17,7 +16,7 @@ display_dns_info() {
 }
 
 # Main script starts here
-if [ "$#" -eq 1 ]; then
+if [ -z $2 ]; then
     domain="$1"
     subdomains=("www" "lb-01" "web-01" "web-02")
     for subdomain in "${subdomains[@]}"; do
