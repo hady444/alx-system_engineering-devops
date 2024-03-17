@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# return 301
+
+frontend http_front
+    bind *:80
+    bind *:443 ssl crt /etc/haproxy/certs/lb-01.hady4h.tech.pem
+    redirect scheme https code 301 if !{ ssl_fc }
+    default_backend http_back
+
+backend http_back
+    balance roundrobin
+    server 477100-web-01 35.175.134.192:80 check
+    server 477100-web-02 34.207.63.125:80 check
