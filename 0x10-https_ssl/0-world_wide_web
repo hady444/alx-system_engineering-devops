@@ -5,14 +5,9 @@ display_dns_info() {
     local subdomain="$1"
     local domain="$2"
 
-    dig_output=$(dig "${subdomain}.${domain}" | awk '/^;; ANSWER SECTION:$/,/^$/' | awk '/IN\s+A/')
-    if [[ -n "$dig_output" ]]; then
-        destination=$(echo "$dig_output" | awk '{print $NF}')
-        record_type=$(echo "$dig_output" | awk '{print $4}')
-        echo "The subdomain $subdomain is a $record_type record and points to $destination"
-    else
-        echo "The subdomain $subdomain does not exist"
-    fi
+    destination=$(dig "$subdomain.$domain" | awk '/ANSWER SECTION/ {getline; print $5}')
+    record_type=$(dig "$subdomain.$domain" | awk '/ANSWER SECTION/ {getline; print $4}')
+    echo "The subdomain $subdomain is a $record_type record and points to $destination"
 }
 
 # Main script starts here
