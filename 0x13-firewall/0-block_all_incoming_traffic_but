@@ -1,5 +1,3 @@
-ufw default deny incoming
-ufw default deny outgoing
 ufw allow http
 ufw allow https
 ufw allow ssh
