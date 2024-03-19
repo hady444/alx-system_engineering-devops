@@ -16,6 +16,3 @@ mysqldump -u root -p"${MYSQL_PASSWORD}" --all-databases > backup.sql
 
 # Compress the dump file into a tar.gz archive with the specified name format
 tar -czvf "${DATE}.tar.gz" backup.sql
-
-# Remove the uncompressed dump file
-rm backup.sql
