@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 # use nginx user not root
-
-# Step 1: Update NGINX configuration to run as nginx user
-sed -i 's/user  nginx;/user nginx;/g' /etc/nginx/nginx.conf
-
-# Step 2: Update NGINX configuration to listen on port 8080
-sed -i 's/listen       80;/listen       8080;/g' /etc/nginx/nginx.conf
-
-# Step 3: Restart NGINX service to apply changes
-service nginx restart
+sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
+sed -i "s/80/8080/g" /etc/nginx/sites-available/default
+chmod 644 /etc/nginx/nginx.conf
+pkill apache2
+sudo -u nginx service nginx start
