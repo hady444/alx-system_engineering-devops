@@ -2,7 +2,7 @@
 # Create a certificate using certbot and configure HAproxy to accept encrypted traffic
 sudo apt-get update
 sudo apt-get install certbot
-sudo certbot certonly --standalone -d www.example.com
+sudo certbot certonly --standalone -d www.hady4h.tech
 
 frontend http_front
     bind *:80
@@ -12,6 +12,6 @@ frontend http_front
 
 backend http_back
     balance roundrobin
-    server 477100-web-01 35.175.134.192:80 check
-    server 477100-web-02 34.207.63.125:80 check
+    server 477100-web-01 100.26.230.127:80 check
+    server 477100-web-02 35.168.1.75:80 check
 sudo service haproxy restart

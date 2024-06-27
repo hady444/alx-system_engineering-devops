@@ -15,8 +15,8 @@ frontend http_front
 
 backend http_back
     balance roundrobin
-    server 477100-web-01 35.175.134.192:80 check
-    server 477100-web-02 34.207.63.125:80 check
+    server 477100-web-01 54.197.127.2:80 check
+    server 477100-web-02 100.24.72.203:80 check
 ' >> /etc/haproxy/haproxy.cfg
 
 # Restart HAProxy to apply changes
